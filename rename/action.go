@@ -1,17 +1,16 @@
-package tools
+package rename
 
 import (
 	"errors"
 	"fmt"
 	"github.com/gookit/color"
 	"github.com/lemonlzy/flora/common"
-	tools "github.com/lemonlzy/flora/tools/rename"
 	"github.com/urfave/cli/v2"
 	"path/filepath"
 )
 
 func Action(cli *cli.Context) error {
-	err := common.CheckArgs(cli, "tools")
+	err := common.CheckArgs(cli, "rename")
 	if err != nil {
 		return err
 	}
@@ -26,7 +25,7 @@ func Action(cli *cli.Context) error {
 	}
 
 	// 必须为文件夹，不能为文件路径
-	if ok := tools.IsDir(path); !ok {
+	if ok := IsDir(path); !ok {
 		color.Red.Println(module, "path must be Dir, please check...")
 		return errors.New("path must be Dir")
 	}
@@ -43,7 +42,7 @@ func Action(cli *cli.Context) error {
 	newName := cli.Args().Get(2)
 
 	// 批量重命名文件夹下，带有removeName字符串的文件
-	err = tools.BatchRenameFiles(path, removeName, newName)
+	err = BatchRenameFiles(path, removeName, newName)
 	if err != nil {
 		color.Red.Println(module, "BatchRename failed, please check...")
 		return errors.New("BatchRename failed")

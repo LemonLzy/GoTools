@@ -1,13 +1,12 @@
 package main
 
 import (
+	"github.com/lemonlzy/flora/pretty"
+	"github.com/lemonlzy/flora/rename"
 	"log"
 	"os"
 
 	"github.com/urfave/cli/v2"
-
-	"github.com/lemonlzy/flora/new"
-	"github.com/lemonlzy/flora/tools"
 )
 
 var Version string
@@ -18,8 +17,9 @@ func main() {
 		Usage:   "flora脚手架工具",
 		Version: Version,
 		Commands: []*cli.Command{
-			new.Cmd,
-			tools.Cmd,
+			//new.Cmd,
+			rename.Cmd,
+			pretty.Cmd,
 			//add.Cmd,
 			//update.Cmd,
 			//upgrade.Cmd,

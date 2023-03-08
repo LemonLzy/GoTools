@@ -1,4 +1,4 @@
-package tools
+package rename
 
 import (
 	"io/fs"

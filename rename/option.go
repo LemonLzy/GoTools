@@ -1,4 +1,4 @@
-package tools
+package rename
 
 type DirInfo struct {
 	Name     string // 目录名
