@@ -45,10 +45,10 @@ func Action(cli *cli.Context) error {
 	err = BatchRenameFiles(path, removeName, newName)
 	if err != nil {
 		color.Red.Println(module, "BatchRename failed, please check...")
-		return errors.New("BatchRename failed")
+		return errors.New("batchRename failed")
 	}
 
-	color.Green.Println(module, "BatchRename Success!")
+	color.Green.Println(module, "batchRename Success!")
 
 	return nil
 }

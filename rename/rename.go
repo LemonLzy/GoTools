@@ -1,24 +1,15 @@
 package rename
 
 import (
+	"errors"
+	"fmt"
+	"github.com/gookit/color"
 	"io/fs"
 	"log"
 	"os"
 	"path/filepath"
-	"reflect"
-	"strconv"
 	"strings"
 )
-
-func CheckIsHidden(file os.FileInfo) bool {
-	//"通过反射来获取Win32FileAttributeData的FileAttributes
-	fa := reflect.ValueOf(file.Sys()).Elem().FieldByName("FileAttributes").Uint()
-	byteFa := []byte(strconv.FormatUint(fa, 2))
-	if byteFa[len(byteFa)-2] == '1' {
-		return true
-	}
-	return false
-}
 
 func BatchRenameFiles(dir, subStr, newName string) error {
 	var filenameSlice []string
@@ -33,8 +24,9 @@ func BatchRenameFiles(dir, subStr, newName string) error {
 		}
 
 		filename := info.Name()
-		if strings.HasPrefix(filename, ".") {
-			return filepath.SkipDir
+		if CheckIsHidden(info) {
+			// 以.开头的文件，或者隐藏文件直接跳过
+			return nil
 		}
 
 		fileDir := filepath.Dir(path) + "/"
@@ -97,4 +89,30 @@ func IsDir(path string) bool {
 	}
 
 	return stat.IsDir()
+}
+
+// HasReadPermission 判断文件夹是否具有可读权限
+func HasReadPermission(path string) bool {
+	stat, err := os.Stat(path)
+	if err != nil {
+		color.Red.Println(module, "get permission failed, please check...")
+		return false
+	}
+
+	fileMode := stat.Mode()
+	fmt.Println("file_mode:", fileMode)
+	perm := fileMode.Perm()
+	fmt.Println("permission:", uint32(perm))
+
+	return false
+}
+
+// GrantReadPermission 赋予文件夹可读权限
+func GrantReadPermission(path string) error {
+	err := os.Chmod(path, 0744)
+	if err != nil {
+		color.Red.Println(module, "grant permission failed, please check...")
+		return errors.New("grant Permission failed")
+	}
+	return nil
 }
