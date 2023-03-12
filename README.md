@@ -4,7 +4,13 @@
 项目分层遵循[`Go Project Layout`](https://medium.com/golang-learn/go-project-layout-e5213cdcfaa2)。
 
 ---
+##### chatgpt robot工具
+将个人微信变为chatgpt对话机器人（请先更新chatgpt/config/config.json中的配置）
+```shell
+go run main.go chat
+```
 
+---
 ##### rename工具
 根据绝对路径，将文件夹下，包含old name的文件名，替换为new name的文件名（new name可以为空）
 ```shell

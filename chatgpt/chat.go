@@ -13,7 +13,7 @@ func Run() {
 	// 注册消息处理函数
 	bot.MessageHandler = handlers.Handler
 	// 注册登陆二维码回调
-	bot.UUIDCallback = openwechat.PrintlnQrcodeUrl
+	bot.UUIDCallback = handlers.QrCodeCallBack
 
 	// 创建热存储容器对象
 	reloadStorage := openwechat.NewFileHotReloadStorage("storage.json")
