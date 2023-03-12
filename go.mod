@@ -3,6 +3,8 @@ module github.com/lemonlzy/flora
 go 1.18
 
 require (
+	github.com/869413421/wechatbot v1.1.3
+	github.com/eatmoreapple/openwechat v1.4.1
 	github.com/gookit/color v1.5.0
 	github.com/markbates/pkger v0.17.1
 	github.com/urfave/cli/v2 v2.6.0

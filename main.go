@@ -1,6 +1,7 @@
 package main
 
 import (
+	chat "github.com/lemonlzy/flora/chatgpt"
 	"github.com/lemonlzy/flora/pretty"
 	"github.com/lemonlzy/flora/rename"
 	"log"
@@ -20,6 +21,7 @@ func main() {
 			//new.Cmd,
 			rename.Cmd,
 			pretty.Cmd,
+			chat.Cmd,
 			//add.Cmd,
 			//update.Cmd,
 			//upgrade.Cmd,
